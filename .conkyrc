@@ -1,0 +1,175 @@
+# Conky, a system monitor, based on torsmo
+#
+# Any original torsmo code is licensed under the BSD license
+#
+# All code written since the fork of torsmo is licensed under the GPL
+#
+# Please see COPYING for details
+#
+# Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+# Copyright (c) 2005-2010 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+# All rights reserved.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# position
+alignment top_left
+gap_x 5
+gap_y 50
+
+temperature_unit celsius
+background no
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+use_xft yes
+xftfont DejaVu Sans Mono:size=12
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type desktop
+#own_window_type normal
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+stippled_borders 0
+update_interval 1.0
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+
+###
+
+# Send conkey output to terminal.
+out_to_console no
+
+# border margins
+#border_margin 4
+
+# border width
+border_width 1
+
+gap_x 150
+gap_y 10
+
+# Update interval in seconds
+update_interval 0.07
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+own_window_hints undecorated,below,skip_taskbar
+own_window_type normal
+
+own_window_argb_visual yes
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+###
+
+TEXT
+
+
+
+
+${font Arial:bold:size=7}${color #6487A1}DATE AND TIME ${color #6487A1}${hr 2}
+#${color #A3C4E4} ${font :size=30}$alignc${time %H:%M}
+${color #A3C4E4} ${font :size=15}$alignc${time %Y-%m-%d}T${time %H:%M:%S}Z
+#${voffset -30}${font :bold:size=10}$alignc${time %d %b. %Y}
+${font :bold:size=12}$alignc${time %A}
+${font Arial:bold:size=7}${color #6487A1}SYSTEM ${color #6487A1}${hr 2}
+
+${color #356282}$sysname $kernel $machine - $nodename
+${color #356282}${execi 1000 cat /proc/cpuinfo | grep -m 1 'model name' | sed -e 's/model name.*: //'} ${color #A3C4E4}
+${color #356282}Uptime:${color #A3C4E4} $uptime ${color #356282} Load:${color #A3C4E4} $loadavg
+
+${color #6487A1}CPU ${color #6487A1}${hr 2}
+
+${color #356282}usage:${color #356282} ${color #A3C4E4}${cpu}% ${alignr}${color #356282}${cpubar 5,120}
+${color #356282}${cpugraph 000000 0077ff}
+
+${color #6487A1}RAM ${color #6487A1}${hr 2}
+
+${color #356282}RAM:${color #A3C4E4} $mem/$memmax - $memperc% ${alignr}${color #356282}${membar 5,120}
+${color #356282}SWP:${color #A3C4E4} $swap/$swapmax - $swapperc% ${alignr}${color #356282}${swapbar 5,120}
+
+${color #6487A1}HD ${color #6487A1}${hr 2}
+
+${color #356282}HD IO: ${color #A3C4E4}${diskio} ${alignr}${color #356282}
+${color #356282}${diskiograph 000000 0077ff}
+${color #356282}hard drives:
+${color #356282} root:${goto 70}${color #A3C4E4}${fs_used /}/${fs_size /}${alignr}${color #356282}${fs_bar 5,120 /}
+${color #356282} home:${goto 70}${color #A3C4E4}${fs_used /home}/${fs_size /home}${alignr}${color #356282}${fs_bar 5,120 /home}
+
+${color #6487A1}PROCESSES ${color #6487A1}${hr 2}
+
+${color #356282}Processes:${color #A3C4E4} $processes  ${color #356282}Running:${color #A3C4E4} $running_processes ${color #356282}
+
+${color #356282}CPU usage${goto 120}PID${goto 170}CPU%${goto 220}MEM%
+${color #A3C4E4} ${top name 1}${goto 120}${top pid 1}${goto 163}${top cpu 1}${goto 213}${top mem 1}
+${color #A3C4E4} ${top name 2}${goto 120}${top pid 2}${goto 163}${top cpu 2}${goto 213}${top mem 2}
+${color #A3C4E4} ${top name 3}${goto 120}${top pid 3}${goto 163}${top cpu 3}${goto 213}${top mem 3}
+${color #A3C4E4} ${top name 4}${goto 120}${top pid 4}${goto 163}${top cpu 4}${goto 213}${top mem 4}
+${color #A3C4E4} ${top name 5}${goto 120}${top pid 5}${goto 163}${top cpu 5}${goto 213}${top mem 5}
+${color #356282}RAM usage${goto 120}PID${goto 220}MEM%
+${color #A3C4E4} ${top_mem name 1}${goto 120}${top_mem pid 1}${goto 213}${top_mem mem 1}
+${color #A3C4E4} ${top_mem name 2}${goto 120}${top_mem pid 2}${goto 213}${top_mem mem 2}
+${color #A3C4E4} ${top_mem name 3}${goto 120}${top_mem pid 3}${goto 213}${top_mem mem 3}
+${color #A3C4E4} ${top_mem name 4}${goto 120}${top_mem pid 4}${goto 213}${top_mem mem 4}
+${color #A3C4E4} ${top_mem name 5}${goto 120}${top_mem pid 5}${goto 213}${top_mem mem 5}
+
+${color #6487A1}NETWORKING ${color #6487A1}${hr 2}
+
+${color #356282}address: ${color #A3C4E4}${addr enp0s31f6}
+
+${color #356282}down:${color #A3C4E4} ${downspeed enp0s31f6} k/s $alignr${color #356282} up:${color #A3C4E4} ${upspeed enp0s31f6} k/s
+${color #356282}${downspeedgraph enp0s31f6 27,120 000000 0077ff 180} $alignr${color #356282}${upspeedgraph enp0s31f6 27,120 000000 0077ff 25}
+${color #356282}total down: ${color #A3C4E4}${totaldown enp0s31f6}$alignr${color #356282}total up: ${color #A3C4E4}${totalup enp0s31f6}
+
+${color #356282}port(s):${alignr}
+${color #356282}inbound: ${color #A3C4E4}${tcp_portmon 1 32767 count}  ${color #356282}outbound: ${color #A3C4E4}${tcp_portmon 32768 61000 count}${alignr}${color #356282} total: ${color #A3C4E4}${tcp_portmon 1 65535 count}
+
+${color #6487A1}${color #6487A1}${hr 2}
+
+CPU TEMP: ${alignr}${execi 8 sensors | grep -m 1 'Package id 0' | cut -c14-18} °C
+
+CORE 1 TEMP: ${alignr}${execi 8 sensors | grep -m 1 'Core 0' | cut -c13-18} °C
+
+CORE 2 TEMP: ${alignr}${execi 8 sensors | grep -m 1 'Core 1' | cut -c13-18} °C
+
+CORE 3 TEMP: ${alignr}${execi 8 sensors | grep -m 1 'Core 2' | cut -c13-18} °C
+
+CORE 4 TEMP: ${alignr}${execi 8 sensors | grep -m 1 'Core 3' | cut -c13-18} °C
+
+GPU TEMP: ${alignr}${execi 8 sensors | grep -m 2 'temp1' | cut -c13-17 | awk '/+/{getline; print $0;};'} °C
+
+#sudo update-alternatives --config editor (change to nano)
+#use visudo to add line "gavin  ALL=NOPASSWD:/usr/sbin/hddtemp" (sudo hddtemp no longer asks for pw)
+#sudo hddtemp --debug /dev/sda1 to find SMART field for temperature
+#append field number to /etc/hddtemp.db -- "sudo echo "Samsung SSD 850 EVO 1TB" 190 C "Label for SSD 1TB" >> /etc/hddtemp.db"
+HDD 1 TEMP: ${alignr} +${execi 8 sudo hddtemp --debug /dev/sda | grep -m 1 'field(190)' | cut -c15-16} °C
+
+HDD 2 TEMP: ${alignr} +${execi 8 sudo hddtemp --debug /dev/sdb1 | grep -m 1 'field(194)' | cut -c15-16} °C
+
+${color #6487A1}${color #6487A1}${hr 2}
