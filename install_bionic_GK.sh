@@ -52,12 +52,12 @@ declare -a package_list=(
   "audacity" #audio editor
   "vlc" #video player
   "openshot" #video editor
-  "shotwell gthumb" #photograph managers
   "cheese" #webcam booth
   "blender" #3D graphical modelling and rendering
   "inkscape" #vector graphics editor
+  "shotwell gthumb feh" #photograph managers/viewers
   "gimp" #image manipulation program
-  "pinta darktable" #alternative image manipulation programs
+  "pinta darktable mypaint" #alternative image manipulation programs
   "musescore" #music composition and notation software
   "calibre" #ebook library and manager
   "scribus" #desktop publishing system

@@ -18,6 +18,7 @@ declare -a package_list=(
   "digikam" #photo management app
   "cantor" #interface for mathematical applications
   "ark" #archiving tool
+  "skanlite" #tool for scanning images
 )
 
 echo -e "This script will install the Kubuntu desktop for Ubuntu 18.04.\nDo you wish to install all packages automatically [y], be prompted\nfor installation of each package [n], view the list of packages to be installed [l], or cancel the installation [c]?"
