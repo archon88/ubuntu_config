@@ -108,6 +108,7 @@ case "$Response" in
         sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt update #Ensure all repos enabled and package list is up to date
         for package in "${package_list[@]}"
         do
+          echo "installing package ${package}"
           sudo apt install -y --install-suggests $package
         done
         sudo apt -y full-upgrade && echo "Installation finished!" && exit;; #clean stuff up and ensure that eveerything is latest version
@@ -117,6 +118,7 @@ case "$Response" in
         sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt update
         for package in "${package_list[@]}"
         do
+          echo "installing package ${package}"
           sudo apt install --install-suggests $package
         done
         sudo apt full-upgrade && echo "Installation finished!" && exit;;
