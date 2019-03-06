@@ -21,11 +21,21 @@ declare -a package_list=(
   "skanlite" #tool for scanning images
 )
 
-echo -e "This script will install the Kubuntu desktop for Ubuntu 18.04.\nDo you wish to install all packages automatically [y], be prompted\nfor installation of each package [n], view the list of packages to be installed [l], or cancel the installation [c]?"
+echo -e "This script will install a range of useful packages for Ubuntu 18.04.\nDo you wish to install all packages automatically [y], install all packages automatically\n(including suggested packages -- not recommended!) [S], be prompted\nfor installation of each package [n], view the list of packages to be installed [l], or cancel the installation [c]?"
 read installResponse
 
 case "$installResponse" in
     "y")
+        echo "Automatic installation of all packages has begun."
+        sudo apt install -y software-properties-common python3-software-properties #Might be necessary to use add-apt-repository
+        sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt update #Ensure all repos enabled and package list is up to date
+        for package in "${package_list[@]}"
+        do
+          echo "installing package ${package}"
+          sudo apt install -y $package
+        done
+        sudo apt -y full-upgrade && echo "Installation finished!" && exit;; #clean stuff up and ensure that eveerything is latest version
+    "S")
         echo "Automatic installation of all packages has begun."
         sudo apt install -y software-properties-common python3-software-properties #Might be necessary to use add-apt-repository
         sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt-get update #Ensure all repos enabled and package list is up to date

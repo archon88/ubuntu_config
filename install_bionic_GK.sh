@@ -98,11 +98,21 @@ declare -a package_list=(
   "miro"
 )
 
-echo -e "This script will install a range of useful packages for Ubuntu 18.04.\nDo you wish to install all packages automatically [y], be prompted\nfor installation of each package [n], view the list of packages to be installed [l], or cancel the installation [c]?"
+echo -e "This script will install a range of useful packages for Ubuntu 18.04.\nDo you wish to install all packages automatically [y], install all packages automatically\n(including suggested packages -- not recommended!) [S], be prompted\nfor installation of each package [n], view the list of packages to be installed [l], or cancel the installation [c]?"
 read Response
 
 case "$Response" in
     "y")
+        echo "Automatic installation of all packages has begun."
+        sudo apt install -y software-properties-common python3-software-properties #Might be necessary to use add-apt-repository
+        sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt update #Ensure all repos enabled and package list is up to date
+        for package in "${package_list[@]}"
+        do
+          echo "installing package ${package}"
+          sudo apt install -y $package
+        done
+        sudo apt -y full-upgrade && echo "Installation finished!" && exit;; #clean stuff up and ensure that eveerything is latest version
+    "S")
         echo "Automatic installation of all packages has begun."
         sudo apt install -y software-properties-common python3-software-properties #Might be necessary to use add-apt-repository
         sudo apt-add-repository universe && sudo apt-add-repository multiverse && sudo apt update #Ensure all repos enabled and package list is up to date
@@ -119,7 +129,7 @@ case "$Response" in
         for package in "${package_list[@]}"
         do
           echo "installing package ${package}"
-          sudo apt install --install-suggests $package
+          sudo apt install $package
         done
         sudo apt full-upgrade && echo "Installation finished!" && exit;;
     "l")
